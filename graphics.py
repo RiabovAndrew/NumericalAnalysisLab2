@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 
 class Graphics:
     def __init__(self):
-        pass
+        self.style = [ 'r', 'g', 'b', 'r--', 'g--', 'b--', 'r:', 'g:', 'b:']
 
 
     def draw(self, xs: list, ys: list, title: str):
@@ -14,11 +14,12 @@ class Graphics:
                 raise RuntimeError('Different number of x and y points.')
             plt.plot(xs, ys)
         else:
-            for x_pnt, y_pnt in zip(xs, ys):
+            for x_pnt, y_pnt, style in zip(xs, ys, self.style):  # If the grahics number is more than styles in 'self',
+                                                                 # all overflowing graphics are not drawn
                 if len(x_pnt) != len(y_pnt):
                     raise RuntimeError('Different number of x and y points')
                 else:
-                    plt.plot(x_pnt, y_pnt, 'b--')
+                    plt.plot(x_pnt, y_pnt, style)
         plt.title(title)
         plt.grid(True)
         plt.xlabel('x axis')

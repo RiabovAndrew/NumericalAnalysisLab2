@@ -1,4 +1,5 @@
 from numpy import arange
+from math import sin, cos
 
 
 class RungeKutta:
