@@ -1,5 +1,6 @@
 from numpy import arange
 from math import sin, cos
+from typing import Tuple
 
 
 class RungeKutta:
@@ -22,7 +23,7 @@ class RungeKutta:
         self.z = diff_init_val
 
 
-    def get_values(self, begin: float, end: float, step: float) -> tuple[float, float, float]:
+    def get_values(self, begin: float, end: float, step: float) -> Tuple[float, float, float]:
         '''Calculates the approximate values of a function using Runge Kuttas method.\n
             Returns an approximate value of a function.\n
             `begin` - x point we start with\n

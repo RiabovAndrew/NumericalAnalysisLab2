@@ -58,7 +58,7 @@ class ReductionMethod:
 if __name__ == '__main__':  # Some tests.
     # IMPORTANT! Red - approximate function, green - original funciton
     conditions = {
-        0: (ReductionMethod(1, 2, 1, 0, 1, 3, 1, 0.5, 'x**2', '-x', '(6 - (3*(x**2))) / (x**4)'), lambda x: x**(-2)),                 # Test example, Bullshit
+        0: (ReductionMethod(1, 2, 1, 0, 1, 3, 1, 0.5, 'x**2', '-x', '(6 - (3*(x**2))) / (x**4)'), lambda x: x**(-2)),           # Test example, Bullshit
         1: (ReductionMethod(0.5, 1, 0, 1, 1.5, 1, 1, 4, '2', '-4/x', '1'), lambda x: x**2 + 0.5*x),                             # v11, Ok
         2: (ReductionMethod(0, 1, 1, 0, 1, 1, 2, 0, '-1', '-2', '-3*2.7182**(-x)'), lambda x: (x+1)*2.7181**(-x)),              # v13, Ok
         3: (ReductionMethod(0, 0.5, 0, 1, 0, 1, 0, 0.5*sin(0.5), '2*x', '-1', '2 * cos(x) * (x**2 + 1)'), lambda x: x*sin(x))   # v10, Ok
