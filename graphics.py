@@ -1,5 +1,9 @@
-#import matplotlib.pylab as plt
-from matplotlib import pyplot as plt
+try:
+    from matplotlib import pyplot as plt
+except ModuleNotFoundError as mnfe:
+    print(mnfe)
+    exit()
+
 
 class Graphics:
     def __init__(self):

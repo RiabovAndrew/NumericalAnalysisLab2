@@ -1,19 +1,15 @@
-from numerical import ReductionMethod
+try:
+    from numerical import ReductionMethod
+    from analytical import BestSquare
+    from graphics import Graphics
+    from table_print import TablePrinter
+except ModuleNotFoundError as mnfe:
+    print(mnfe)
+    exit()
 
 
 def main():
-    '''The function arguments represent the following polynomial terms:
-    Ly(x) = y"(x) + p(x)y'(x) + q(x)y(x) = f(x)
-    with the following boundary conditions:
-    a0*y(a) + a1*y'(a) = A,
-    b0*y(b) + b1*y'(b) = B'''
-    print("Ly(x) = y\"(x) + y'(x)*", end='')
-    p = input()
-    print('\b', end='')
-    q = input(' + y(x)*')
-    f = input(' = ')
-    #temp_stuff = ReductionMethod()
-    pass
+    print('Not implemented yet.')
 
 
 if __name__ == '__main__':

@@ -1,6 +1,13 @@
-from numpy import arange
-from math import sin, cos
-from typing import Tuple
+try:
+    from numpy import arange
+    from math import sin, cos, log
+    from typing import Tuple
+except ModuleNotFoundError as mnfe:
+    print(mnfe)
+    exit()
+
+
+DEBUG = False
 
 
 class RungeKutta:
@@ -11,11 +18,11 @@ class RungeKutta:
             `x_init_val` - x cooridnate values of which we know\n
             `func_init_val` - known to us y value\n
             `diff_init_val` - known to us y' value'''
-        func = func.replace("y'", 'z')
-        self.zdiff = lambda x, y, z: eval(
+
+        self.zdiff = lambda x, y, z: eval(  # Not the safest way but the easyest one. For univercity lab is just perfect!
             func.replace('x', f'({x})')
+                .replace("y'", f'({z})')
                 .replace('y', f'({y})')
-                .replace('z', f'({z})')
         )
         self.ydiff = lambda z: z
         self.x = x_init_val
@@ -43,15 +50,17 @@ class RungeKutta:
             k3 = self.ydiff(self.z + q2 * step)
             self.z = self.z + (step / 6) * (q0 + 2*q1 + 2*q2 + q3)
             self.y = self.y + (step / 6) * (k0 + 2*k1 + 2*k2 + k3)
-            #sy = self.y
-            #self.y = self.y + step * self.ydiff(self.z)
-            #self.z = self.z + step * self.zdiff(self.x, sy, self.z)
             self.x += step
 
 
 #Simple test.
 if __name__ == '__main__':
-    #func = "(6 - 3*x**2 - y'*x**6 + y*x**5) / (x**4)"
+    if not DEBUG:
+        print('WARNING! This file is not intended to be main file. Consider running "main.py".')
+        print('If you want to just test if it all works - change the "DEBUG" variable to True.')
+        exit()
+    else:
+        print('Runge Kuttas method tests:')
     func = "0.8 + x*y' - 2*x*y"
     x_init_val = 1.5
     func_init_val = -0.2

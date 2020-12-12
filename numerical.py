@@ -1,7 +1,14 @@
-from runge_kut import RungeKutta
-from graphics import Graphics
-from math import sin, cos
-from copy import copy
+try:
+    from runge_kutta import RungeKutta
+    from graphics import Graphics
+    from math import sin, cos, log  # 'log', 'tan' and all other math functions shall be imported here if needed.
+    from copy import copy
+except ModuleNotFoundError as mnfe:
+    print(mnfe)
+    exit()
+
+
+DEBUG = True
 
 
 class ReductionMethod:
@@ -56,14 +63,23 @@ class ReductionMethod:
 
 
 if __name__ == '__main__':  # Some tests.
+    if not DEBUG:
+        print('WARNING! This file is not intended to be main file. Consider running "main.py".')
+        print('If you want to just test if it all works - change the "DEBUG" variable to True.')
+        exit()
+    else:
+        print('Reduction method test.')
+
     # IMPORTANT! Red - approximate function, green - original funciton
     conditions = {
-        0: (ReductionMethod(1, 2, 1, 0, 1, 3, 1, 0.5, 'x**2', '-x', '(6 - (3*(x**2))) / (x**4)'), lambda x: x**(-2)),           # Test example, Bullshit
-        1: (ReductionMethod(0.5, 1, 0, 1, 1.5, 1, 1, 4, '2', '-4/x', '1'), lambda x: x**2 + 0.5*x),                             # v11, Ok
-        2: (ReductionMethod(0, 1, 1, 0, 1, 1, 2, 0, '-1', '-2', '-3*2.7182**(-x)'), lambda x: (x+1)*2.7181**(-x)),              # v13, Ok
-        3: (ReductionMethod(0, 0.5, 0, 1, 0, 1, 0, 0.5*sin(0.5), '2*x', '-1', '2 * cos(x) * (x**2 + 1)'), lambda x: x*sin(x))   # v10, Ok
+        0: (ReductionMethod(1, 2, 1, 0, 1, 3, 1, 0.5, 'x**2', '-x', '(6 - (3*(x**3))) / (x**4)'), lambda x: x**(-2)),               # Test example, Ok
+        1: (ReductionMethod(0.5, 1, 0, 1, 1.5, 1, 1, 4, '2', '-4/x', '1'), lambda x: x**2 + 0.5*x),                                 # v11, Ok
+        2: (ReductionMethod(0, 1, 1, 0, 1, 1, 2, 0, '-1', '-2', '-3*2.7182**(-x)'), lambda x: (x+1)*2.7181**(-x)),                  # v13, Ok
+        3: (ReductionMethod(0, 0.5, 0, 1, 0, 1, 0, 0.5 * sin(0.5), '2*x', '-1', '2 * cos(x) * (x**2 + 1)'), lambda x: x*sin(x)),    # v10, Ok
+        4: (ReductionMethod(0, 1, 1, 1, 1, 0, 1, 4, '2', '-3', '-6*x**2+8*x+1'), lambda x: 2*x**2 + 1),                             # v1, Ok
+        5: (ReductionMethod(0, 1, 1, 0, -0.25, 1, -3, 0, '2 / (x-4)', '(x-4)', '1'), lambda x: 1 / (x-4))                           # v2, Ok
     }
-    destiny = 1  # Change this to switch equations
+    destiny = 0  # Change this to switch equations
     step = 0.01  # Change this to change step
 
     xs, ys, rys = list(), list(), list()
