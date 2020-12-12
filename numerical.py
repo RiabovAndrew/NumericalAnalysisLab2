@@ -1,8 +1,10 @@
 try:
     from runge_kutta import RungeKutta
     from graphics import Graphics
+    from config import ReductionMethodConfig
     from math import sin, cos, log  # 'log', 'tan' and all other math functions shall be imported here if needed.
     from copy import copy
+    from typing import Dict, Union
 except ModuleNotFoundError as mnfe:
     print(mnfe)
     exit()
