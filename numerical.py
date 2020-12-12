@@ -79,8 +79,8 @@ if __name__ == '__main__':  # Some tests.
         4: (ReductionMethod(0, 1, 1, 1, 1, 0, 1, 4, '2', '-3', '-6*x**2+8*x+1'), lambda x: 2*x**2 + 1),                             # v1, Ok
         5: (ReductionMethod(0, 1, 1, 0, -0.25, 1, -3, 0, '2 / (x-4)', '(x-4)', '1'), lambda x: 1 / (x-4))                           # v2, Ok
     }
-    destiny = 0  # Change this to switch equations
-    step = 0.01  # Change this to change step
+    destiny = 5  # Change this to switch equations
+    step = 0.001  # Change this to change step
 
     xs, ys, rys = list(), list(), list()
     grph = Graphics()

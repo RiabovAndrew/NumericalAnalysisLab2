@@ -12,7 +12,7 @@ DEBUG = False
 
 class RungeKutta:
     '''Runge Kuttas method to solve differential equations of the second power.'''
-
+    
     def __init__(self, func: str, x_init_val: float, func_init_val: float, diff_init_val: float):
         '''## RungeKuttas initialization.\n
             `x_init_val` - x cooridnate values of which we know\n
@@ -37,8 +37,8 @@ class RungeKutta:
             `end` - x point we finish with\n
             `step` - value, the x is increased on each iteration'''
             
-        for i in arange(begin, end, step):  #Main Runge Kuttas method logic.
-            yield self.x, self.y, self.z  #x - x points cordinate, y - function value in current x, z - derivate of y.
+        for i in arange(begin, end, step):  # Main Runge Kuttas method logic.
+            yield self.x, self.y, self.z  # x - x points cordinate, y - function value in current x, z - derivate of y.
             hlfstp = step / 2
             q0 = self.zdiff(self.x, self.y, self.z)
             k0 = self.ydiff(self.z)
@@ -53,7 +53,7 @@ class RungeKutta:
             self.x += step
 
 
-#Simple test.
+# Simple test.
 if __name__ == '__main__':
     if not DEBUG:
         print('WARNING! This file is not intended to be main file. Consider running "main.py".')
