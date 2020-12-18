@@ -11,7 +11,7 @@ except ModuleNotFoundError as mnfe:
 DEBUG : bool = True
 
 
-class ReductionMethodConfig:
+class Config:
     '''Storing and verification for ReductionMethod'''
 
 
@@ -43,7 +43,7 @@ class ReductionMethodConfig:
 
     def is_valid(self, accurate : str) -> bool:
         for key in self.__values.keys():
-            if key == None:
+            if key is None:
                 return False
 
         x = Symbol('x')
@@ -93,7 +93,7 @@ if __name__ == '__main__':  # Some tests.
     else:
         print('ReductionMethodConfig...')
 
-        config = ReductionMethodConfig()
+        config = Config()
         config['a'] = 1
         config['b'] = 2
 

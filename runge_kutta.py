@@ -1,6 +1,6 @@
 try:
     from numpy import arange
-    from math import sin, cos, log
+    from math import sin, cos, log, e
     from typing import Tuple
 except ModuleNotFoundError as mnfe:
     print(mnfe)
@@ -37,7 +37,7 @@ class RungeKutta:
             `end` - x point we finish with\n
             `step` - value, the x is increased on each iteration'''
             
-        for i in arange(begin, end, step):  # Main Runge Kuttas method logic.
+        for i in arange(begin, end + step, step):  # Main Runge Kuttas method logic.
             yield self.x, self.y, self.z  # x - x points cordinate, y - function value in current x, z - derivate of y.
             hlfstp = step / 2
             q0 = self.zdiff(self.x, self.y, self.z)
