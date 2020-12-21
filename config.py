@@ -8,7 +8,7 @@ except ModuleNotFoundError as mnfe:
     exit()
 
 
-DEBUG : bool = True
+DEBUG : bool = False
 
 
 class Config:
@@ -94,20 +94,20 @@ if __name__ == '__main__':  # Some tests.
         print('ReductionMethodConfig...')
 
         config = Config()
-        config['a'] = 1
-        config['b'] = 2
+        config['a'] = 0
+        config['b'] = 1
 
-        config['g(x)'] = 'x**4'
-        config['p(x)'] = 'x**6'
-        config['q(x)'] = '-x**5'
-        config['f(x)'] = '6 - 3*x**3'
+        config['g(x)'] = '1'
+        config['p(x)'] = '1'
+        config['q(x)'] = '-2'
+        config['f(x)'] = '2*(-x**2 + x + 1)'
 
         config['a0'] = 1
         config['a1'] = 0
         config['A'] = 1
 
-        config['b0'] = 3
-        config['b1'] = 1
-        config['B'] = 0.5
+        config['b0'] = 1
+        config['b1'] = -1
+        config['B'] = 1
 
         print(config.is_valid('x**(-2)'))

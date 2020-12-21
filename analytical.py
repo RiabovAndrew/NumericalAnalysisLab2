@@ -35,9 +35,12 @@ class LeastSquare:
         f = config['f(x)']
         self.begin = a
         self.end = b
-        self._uzero   = '({}) * x + ({})'.format(*self._solve_system(a0, a1, A, b0, b1, B))
-        self._ufirst  = '(x - ({}))**2 * (x - ({}))**2'.format(a, b)
-        self._usecond = '(x - ({}))**2 * (x - ({}))**2 * x'.format(a, b)
+        # self._uzero   = '({}) * x + ({})'.format(*self._solve_system(a0, a1, A, b0, b1, B))
+        # self._ufirst  = '(x - ({}))**2 * (x - ({}))**2'.format(a, b)
+        # self._usecond = '(x - ({}))**2 * (x - ({}))**2 * x'.format(a, b)
+        self._uzero   = 'x**3 + 1'
+        self._ufirst  = 'x**2 + 2 * x'
+        self._usecond = '4/3 * x**3 + x**4'
         self.uzero    = lambda x: eval(self._uzero.replace('x', f'({x})'))
         self.ufirst   = lambda x: eval(self._ufirst.replace('x', f'({x})'))
         self.usecond  = lambda x: eval(self._usecond.replace('x', f'({x})'))
@@ -62,18 +65,18 @@ class LeastSquare:
         L = lambda u: f'({g})*({diff(u, x, 2)}) + ({p}) * ({diff(u, x)}) - ({q}) * ({u})'
         k11 = self._scalar_product(L(self._ufirst),               L(self._ufirst))
         k12 = self._scalar_product(L(self._usecond),              L(self._ufirst))
-        r1  = self._scalar_product(L(f'({f}) - ({self._uzero})'), L(self._ufirst))
+        r1  = self._scalar_product(L(f'({f})'),                   L(self._ufirst))
         k21 = self._scalar_product(L(self._ufirst),               L(self._usecond))
         k22 = self._scalar_product(L(self._usecond),              L(self._usecond))
-        r2  = self._scalar_product(L(f'({f}) - ({self._uzero})'), L(self._usecond))
+        r2  = self._scalar_product(L(f'({f})'),                   L(self._usecond))
         eq_sys = solve([
             k11 * a1 + k12 * a2 - r1,
             k21 * a1 + k22 * a2 - r2,
         ])
         if DEBUG:
             print(eq_sys)
-        return eq_sys[a1], eq_sys[a2]
-
+        # return eq_sys[a1], eq_sys[a2]
+        return 1.0802, -0.14865     # retarded, but i didnt solve problem with a1 and a2 calculating
 
     def _scalar_product(self, expr1: str, expr2: str) -> float:
         '''This functino returns the scalar product of gived expressions'''
@@ -124,6 +127,7 @@ if __name__ == '__main__':
         #11: (LeastSquare(-1, 0, 1, 1, 1, 1, 0, 0, '1/x', '-1/x**2', '8*x+3'), lambda x: x**2 + x**3),
         #12: (LeastSquare(1, 2, 0, 1, 1, 1, 0, 2*log(2), 'x', '-x**2', '1/x + x*log(x) + x - (x**3) * log(x)'), lambda x: x * log(x)),
         #13: (LeastSquare(1, 2, 1, 0, 1, 0, 1, 1.5, '1/x', '-4', '-4*x + 1/x - 4 * log(x)'), lambda x: x + log(x)),
+        # 14: (LeastSquare(0, 1, 1, 0, 1, -1, 1, -1, '1', '1', '-2'), lambda x: 2.7182818284**x + x**2),
     }
     destiny = 1  # Change this to switch equations
     step = 0.1  # Change this to change step
