@@ -49,9 +49,11 @@ def main():
             lspoints.append(set_ls[1])
             if rpoints is not None:
                 rpoints.append(eval(check.replace('x', f'({set_rm[0]})')))
-        if rpoints is not None:
-            grp.draw([xpoints, xpoints, xpoints], [rmpoints, lspoints, rpoints], ['Reduction Method','Least Square Method','Original function'], 'Numerical Analisys Lab 2')
         print(ls.get_analytical_solution())
+        if rpoints is not None:
+            tb = TablePrinter(['xs', *xpoints], ['Reduction Method', *rmpoints], ['Least Square Method', *lspoints], ['Original values', *rpoints])
+            tb.print_table()
+            grp.draw([xpoints, xpoints, xpoints], [rmpoints, lspoints, rpoints], ['Reduction Method','Least Square Method','Original function'], 'Numerical Analisys Lab 2')
     else:
         print('Sorry, the conditions are not valid.')
         exit()
